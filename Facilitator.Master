@@ -1,4 +1,4 @@
-﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Facilitator.master.vb" Inherits="LearnerManagementSystem.Facilitator" %>
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Facilitator.master.vb" Inherits="Form2Flow.Facilitator" %>
 
 <!DOCTYPE html>
 

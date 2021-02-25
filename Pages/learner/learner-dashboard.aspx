@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Learner - Dashboard" Language="vb" AutoEventWireup="false" MasterPageFile="~/Learner.Master" CodeBehind="learner-dashboard.aspx.vb" Inherits="LearnerManagementSystem.learner_dashboard" %>
+﻿<%@ Page Title="Learner - Dashboard" Language="vb" AutoEventWireup="false" MasterPageFile="~/Learner.Master" CodeBehind="learner-dashboard.aspx.vb" Inherits="Form2Flow.learner_dashboard" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

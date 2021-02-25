@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Admin - Add Category" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-category-add.aspx.vb" Inherits="LearnerManagementSystem.admin_category_add" %>
+﻿<%@ Page Title="Admin - Add Category" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-category-add.aspx.vb" Inherits="Form2Flow.admin_category_add" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Admin - User Information" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-user-info.aspx.vb" Inherits="LearnerManagementSystem.admin_user_info" %>
+﻿<%@ Page Title="Admin - User Information" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-user-info.aspx.vb" Inherits="Form2Flow.admin_user_info" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

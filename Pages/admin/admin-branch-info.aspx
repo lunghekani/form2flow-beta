@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Admin - Branch Information" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-branch-info.aspx.vb" Inherits="LearnerManagementSystem.admin_branch_info" %>
+﻿<%@ Page Title="Admin - Branch Information" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-branch-info.aspx.vb" Inherits="Form2Flow.admin_branch_info" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

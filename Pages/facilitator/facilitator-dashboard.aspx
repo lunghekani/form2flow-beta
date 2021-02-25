@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Facilitator - Dashboard" Language="vb" AutoEventWireup="false" MasterPageFile="~/Facilitator.Master" CodeBehind="facilitator-dashboard.aspx.vb" Inherits="LearnerManagementSystem.facilitator_dashboard" %>
+﻿<%@ Page Title="Facilitator - Dashboard" Language="vb" AutoEventWireup="false" MasterPageFile="~/Facilitator.Master" CodeBehind="facilitator-dashboard.aspx.vb" Inherits="Form2Flow.facilitator_dashboard" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 </asp:Content>

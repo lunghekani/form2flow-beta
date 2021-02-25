@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="main.aspx.vb" Inherits="LearnerManagementSystem.main" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="main.aspx.vb" Inherits="Form2Flow.main" %>
 
 <!DOCTYPE html>
 <html lang="en">

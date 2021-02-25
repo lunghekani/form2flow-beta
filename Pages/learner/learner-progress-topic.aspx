@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Learner - Progress Topic" Language="vb" AutoEventWireup="false" MasterPageFile="~/Learner.Master" CodeBehind="learner-progress-topic.aspx.vb" Inherits="LearnerManagementSystem.learner_progress_topic" %>
+﻿<%@ Page Title="Learner - Progress Topic" Language="vb" AutoEventWireup="false" MasterPageFile="~/Learner.Master" CodeBehind="learner-progress-topic.aspx.vb" Inherits="Form2Flow.learner_progress_topic" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

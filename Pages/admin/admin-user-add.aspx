@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Admin - Add User" Language="vb" EnableEventValidation="false" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-user-add.aspx.vb" Inherits="LearnerManagementSystem.admin_user_add" %>
+﻿<%@ Page Title="Admin - Add User" Language="vb" EnableEventValidation="false" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-user-add.aspx.vb" Inherits="Form2Flow.admin_user_add" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

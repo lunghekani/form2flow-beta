@@ -1,4 +1,4 @@
-﻿<%@ Page Title="User List" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-user-list.aspx.vb" Inherits="LearnerManagementSystem.admin_user_list" %>
+﻿<%@ Page Title="User List" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-user-list.aspx.vb" Inherits="Form2Flow.admin_user_list" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

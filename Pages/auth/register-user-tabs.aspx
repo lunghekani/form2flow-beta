@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="register-user-tabs.aspx.vb" Inherits="LearnerManagementSystem.register_user_tabs" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="register-user-tabs.aspx.vb" Inherits="Form2Flow.register_user_tabs" %>
 
 <!DOCTYPE html>
 <html lang="en">

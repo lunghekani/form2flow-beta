@@ -1,4 +1,4 @@
-﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Learner.master.vb" Inherits="LearnerManagementSystem.Learner" %>
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Learner.master.vb" Inherits="Form2Flow.Learner" %>
 
 <!DOCTYPE html>
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Admin - Appeal Information" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-appeal-info.aspx.vb" Inherits="LearnerManagementSystem.admin_appeal_info" %>
+﻿<%@ Page Title="Admin - Appeal Information" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-appeal-info.aspx.vb" Inherits="Form2Flow.admin_appeal_info" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

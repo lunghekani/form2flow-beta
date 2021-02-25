@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Facilitator - Progress Learner" Language="vb" AutoEventWireup="false" MasterPageFile="~/Facilitator.Master" CodeBehind="facilitator-progress-learners.aspx.vb" Inherits="LearnerManagementSystem.facilitator_progress_learners" %>
+﻿<%@ Page Title="Facilitator - Progress Learner" Language="vb" AutoEventWireup="false" MasterPageFile="~/Facilitator.Master" CodeBehind="facilitator-progress-learners.aspx.vb" Inherits="Form2Flow.facilitator_progress_learners" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

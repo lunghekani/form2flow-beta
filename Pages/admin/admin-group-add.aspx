@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Admin - Group Add" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-group-add.aspx.vb" Inherits="LearnerManagementSystem.admin_group_add" %>
+﻿<%@ Page Title="Admin - Group Add" Language="vb" AutoEventWireup="false" MasterPageFile="~/Admin.Master" CodeBehind="admin-group-add.aspx.vb" Inherits="Form2Flow.admin_group_add" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="forgot-password.aspx.vb" Inherits="LearnerManagementSystem.forgot_password" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="forgot-password.aspx.vb" Inherits="Form2Flow.forgot_password" %>
 
 <!DOCTYPE html>
 <html lang="en">
