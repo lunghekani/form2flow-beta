@@ -1,0 +1,163 @@
+<!-- 
+  This page can be used when you want the user to enter the details of the specific form 
+  AND  want him to see the details of other form as well.
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>KEditor - Kademi Content Editor</title>
+        <link rel="stylesheet" type="text/css" href="examples/plugins/bootstrap-3.4.1/css/bootstrap.min.css" data-type="keditor-style" />
+        <link rel="stylesheet" type="text/css" href="examples/plugins/font-awesome-4.7.0/css/font-awesome.min.css" data-type="keditor-style" />
+        <!-- Start of KEditor styles -->
+        <link rel="stylesheet" type="text/css" href="dist/css/keditor.css" data-type="keditor-style" />
+        <link rel="stylesheet" type="text/css" href="dist/css/keditor-components.css" data-type="keditor-style" />
+        <!-- End of KEditor styles -->
+        <link rel="stylesheet" type="text/css" href="examples/plugins/code-prettify/src/prettify.css" />
+        <link rel="stylesheet" type="text/css" href="examples/css/examples.css" />
+
+        <style type="text/css">
+          .form_container{
+              border: 1px solid black;
+              margin: 20px 0;
+              padding: 10px; 
+              display: none;
+          }
+          .dropdown .btn{
+                width: 100%;
+          }
+          .caret{
+            transition: all 0.5 ease;
+          }
+          .btn.rotate .caret{
+            transform: rotate(180deg);
+          }
+          .entry_container{
+            margin: 10px 0;
+          }
+        </style>
+    </head>
+
+  <body>
+    
+    <div class="container">
+      <div class="row clearfix">
+        <div class="span6">
+          <div class="clearfix">
+            <h2>Your Saved Content</h2>
+            <hr>
+            <div id="build">
+              <!-- Container for previous form enteries start -->
+
+              <!-- 
+                
+                data-form-short-code is the id of the form which enteries you want to display.
+                data-no-of-record is the number of how many enteries you want to display.
+
+               -->
+              <div class="" data-get-data="php/get_form_data.php" data-no-of-record="1" data-form-short-code="41">
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript" src="examples/plugins/jquery-1.11.3/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="examples/plugins/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="examples/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="examples/plugins/ckeditor-4.11.4/ckeditor.js"></script>
+    <script type="text/javascript" src="examples/plugins/formBuilder-2.5.3/form-builder.min.js"></script>
+    <script type="text/javascript" src="examples/plugins/formBuilder-2.5.3/form-render.min.js"></script>
+    <script type="text/javascript" src="examples/plugins/code-prettify/src/prettify.js"></script>
+    <script type="text/javascript" src="examples/plugins/js-beautify-1.7.5/js/lib/beautify.js"></script>
+    <script type="text/javascript" src="examples/plugins/js-beautify-1.7.5/js/lib/beautify-html.js"></script>
+    <script type="text/javascript" src="examples/js/custom.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#Submit").click(function(){
+          var content = '';
+          $("#target fieldset div.control-group").each(function(){
+            content += String($(this).html());
+          })
+          $("#show_code").val(content);
+        });
+
+
+        $(document).on("click", ".dropdown-toggle", function(){
+          $(this).toggleClass("rotate");
+          $(this).parent().next().slideToggle();
+        });
+
+        $("[data-short-code]").each(function(){
+          var values = {
+              'id': $(this).attr("data-short-code")
+          };
+          var url = "php/get_form_data.php";
+
+          $.ajax({
+                 type: "POST",
+                 url: url,
+                 data: values, // serializes the form's elements.
+                 success: $.proxy(function(data)
+                 {
+                  var x = $(this).html();
+                     $(this).html(data+x); // show response from the php script.
+                 }, this)
+               });
+
+          
+        });
+
+        var no_of_records =  Number($("[data-form-short-code]").attr("data-no-of-record"));
+        var shortCode = $("[data-form-short-code]").attr("data-form-short-code");
+        var values = {
+            'id': shortCode,
+            'limit': no_of_records
+        };
+        var open_btn_html = `<div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button">
+                  Form Entry
+                  <span class="caret"></span>
+                </button>
+              </div>`;
+        $.ajax({
+               type: "POST",
+               url: "php/get_data.php",
+               data: values, // serializes the form's elements.
+               success: function(data)
+               {
+                var form_data = data;
+                window.formDataArr = [];
+                for (var i = 0; i < no_of_records; i++) {
+                  formDataArr.push(JSON.parse(JSON.parse(form_data)[i]));
+                }
+                var content = "";
+                for (var i = 1; i < no_of_records + 1; i++) {
+                  var content = $("[data-form-short-code]").html();
+                  content += "<div class='entry_container'>" + open_btn_html + "<form id='myForm"+ String(i) +"' class='form_container'></form></div>";
+                  $("[data-form-short-code]").html(content);
+                  
+                  
+                  var values = {
+                      'id': shortCode,
+                  };
+                  var url = "php/get_form_data.php";
+                  embedForm(url, values, i)
+                  
+                }
+               }
+        });
+  
+          
+
+      });
+    </script>
+    
+  </body>
+</html>

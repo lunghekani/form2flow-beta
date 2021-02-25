@@ -1,0 +1,33 @@
+﻿Public Class course_list
+    Inherits System.Web.UI.Page
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        bindGridView()
+    End Sub
+
+    Protected Sub bindGridView()
+
+        Dim dt As DataTable = Courses.getAllCourses()
+        gvCourses.DataSource = dt
+        gvCourses.DataBind()
+
+    End Sub
+
+    Protected Sub gvCourses_PageIndexChanging(sender As Object, e As GridViewPageEventArgs)
+
+    End Sub
+
+    Protected Sub gvCourses_RowCommand(sender As Object, e As GridViewCommandEventArgs)
+        Dim selectedID As Integer = e.CommandArgument
+        If e.CommandName = "View" Then
+            Dim courseID As String = gvCourses.Rows(selectedID).Cells(1).Text
+            Session("selectedCourseID") = courseID
+            Response.Redirect("../admin/admin-branch-list.aspx")
+        End If
+
+    End Sub
+
+    Protected Sub gvCourses_RowDataBound(sender As Object, e As GridViewRowEventArgs)
+
+    End Sub
+End Class

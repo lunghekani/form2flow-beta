@@ -1,0 +1,369 @@
+<!-- 
+  This page can be used when you want the user to enter the details of the specific form 
+  AND  want him to see the details of other form as well.
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>KEditor - Kademi Content Editor</title>
+        <link rel="stylesheet" type="text/css" href="examples/plugins/bootstrap-3.4.1/css/bootstrap.min.css" data-type="keditor-style" />
+        <link rel="stylesheet" type="text/css" href="examples/plugins/font-awesome-4.7.0/css/font-awesome.min.css" data-type="keditor-style" />
+        <!-- Start of KEditor styles -->
+        <link rel="stylesheet" type="text/css" href="dist/css/keditor.css" data-type="keditor-style" />
+        <link rel="stylesheet" type="text/css" href="dist/css/keditor-components.css" data-type="keditor-style" />
+        <!-- End of KEditor styles -->
+        <link rel="stylesheet" type="text/css" href="examples/plugins/code-prettify/src/prettify.css" />
+        <link rel="stylesheet" type="text/css" href="examples/css/examples.css" />
+
+        <style type="text/css">
+          .form_container{
+              border: 1px solid black;
+              margin: 20px 0;
+              padding: 10px; 
+              display: none;
+              pointer-events: none;
+          }
+          .previous_entry_container select, #previousFormCode, #newFormCode{
+            margin: 20px 0px;
+          }
+          .dropdown .btn{
+                width: 100%;
+          }
+          .caret{
+            transition: all 0.5 ease;
+          }
+          .btn.rotate .caret{
+            transform: rotate(180deg);
+          }
+          .entry_container{
+            margin: 10px 0;
+          }
+          .new_form{
+            display: none;
+          }
+          #combine_form, #sendForm{
+            display: none;
+          }
+          .select_container{
+            display: inline-flex;
+          }
+          .select_container div {
+            margin: 0 20px;
+          }
+          .select_container .btn{
+            margin-right: 5vw;
+          }
+          #previousForm, #newFormCode{
+            display: none;
+          }
+        </style>
+    </head>
+
+  <body>
+    
+    <div class="container">
+      <div class="row clearfix">
+        <div class="span6">
+          <div class="clearfix">
+            <h2>Your Saved Content</h2>
+            <hr>
+            <div id="build">
+              
+              <select class="form-control" id="previousFormCode">
+                <option selected disabled hidden>Select Previous Form Code</option>
+              </select>
+
+
+              <div class="previous_entry_container" id="previousForm" data-form-short-code="" data-no-of-record="3">
+                <select class="form-control" id="lookupType">
+                </select>
+                
+                <select class="form-control" id="lookupValue">
+                  <option selected disabled hidden>Select Entry</option>
+                </select>
+
+                <div class="previous_form_container container">
+                  <div class="row">
+                    <div class="col-xs-12 form_container" id="myForm1">
+                      
+                    </div>
+
+                    <div id="combine_form">
+                      
+                    </div>
+                    <form method="post" action="php/insert_form_data.php" id="sendForm">
+                      <button class="btn" id="Submit" name="submit">Submit</button>
+
+                      <input type="text" name="html_content" id="show_code">
+                  </form>
+                  </div>
+                </div>
+              </div>
+
+              <select class="form-control" id="newFormCode">
+                  <option selected disabled hidden>Select New Form Code</option>
+                </select>
+
+              <div class="new_form">
+                <h2>Your New Content</h2>
+                <hr>
+
+                <form id="myForm" class="form-horizontal container" action="php/insert_data.php" method="post" data-short-code="27">
+                  <div id="newFormContent">
+                    
+                  </div>
+                  <div class="select_container">
+                    <button class="btn" type="Submit">Submit</button>
+                      <div class="form-group">
+                        <select id="select_catalog" class="form-control">
+                        </select>
+                      </div>
+                  </div>
+                  
+                    
+                    
+                </form>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript" src="examples/plugins/jquery-1.11.3/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="examples/plugins/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="examples/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="examples/plugins/ckeditor-4.11.4/ckeditor.js"></script>
+    <script type="text/javascript" src="examples/plugins/formBuilder-2.5.3/form-builder.min.js"></script>
+    <script type="text/javascript" src="examples/plugins/formBuilder-2.5.3/form-render.min.js"></script>
+    <script type="text/javascript" src="examples/plugins/code-prettify/src/prettify.js"></script>
+    <script type="text/javascript" src="examples/plugins/js-beautify-1.7.5/js/lib/beautify.js"></script>
+    <script type="text/javascript" src="examples/plugins/js-beautify-1.7.5/js/lib/beautify-html.js"></script>
+    <script type="text/javascript" src="examples/js/custom.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#Submit").click(function(){
+          var content = '';
+          $("#target fieldset div.control-group").each(function(){
+            content += String($(this).html());
+          });
+          $("#show_code").val(content);
+        });
+
+        
+        
+
+        getFormColumnValues('positions', 'email', 'select_catalog', true);
+       
+        getFormColumnValues('Forms', 'short_code', 'previousFormCode', true);
+
+        getFormColumnValues('Forms', 'short_code', 'newFormCode', true);
+
+
+        function getFormColumnValues(tableName, colName, selectId, sameValue=false){
+          $.ajax({
+                 type: "POST",
+                 url: "php/get_data.php",
+                 data: {'table': tableName, "column" : colName},
+                 success: function(data)
+                 {
+                  var fields = JSON.parse(data);
+                  for (var i = 0; i < fields.length; i++) {
+                    if (sameValue) {
+                      $('#'+selectId)
+                        .append($("<option></option>")
+                        .attr("value", fields[i])
+                        .text(fields[i])); 
+                    }
+                    else{
+                      $('#'+selectId)
+                        .append($("<option></option>")
+                        .attr("value", i)
+                        .text(fields[i])); 
+                    }
+                    
+                  }
+                 }
+          });
+        }
+        
+        $('#previousFormCode').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+
+            $("#previousForm").attr("data-form-short-code", valueSelected);
+            $("#myForm1").css("display", "none");
+            $(".new_form").css("display", "none");
+            $("#newFormCode").css("display", "none");
+            $('#lookupValue').css("display", "none");
+
+
+            $("#myForm1").html("");
+            $("#combine_form").html("");
+            var shortCode = valueSelected;
+            var values = {
+                'id': valueSelected,
+            };
+            $.ajax({
+                 type: "POST",
+                 url: "php/get_data.php",
+                 data: values,
+                 success: function(data)
+                 {
+                  $("#previousForm").slideDown();
+                  $('#lookupType').html("");
+
+                  window.formDataArr = [];
+                  window.form_data = data;
+                  if (form_data != "[]") {
+                    for (var i = 0; i < JSON.parse(form_data).length; i++) {
+                      formDataArr.push(JSON.parse(JSON.parse(form_data)[i]));
+                    }
+
+                    var fields = formDataArr[0];
+                    $('#lookupType').html("<option selected disabled hidden>Select lookup type</option>");
+                    for (var i = 0; i < fields.length; i++) {
+                      $('#lookupType')
+                        .append($("<option></option>")
+                        .attr("value", i)
+                        .text(fields[i].name)); 
+                    }
+
+                    embedForm(shortCode, "#myForm1");
+
+                  }
+                  else{
+                    $('#lookupType').html("<option selected disabled hidden>Select another form. No values present</option>");
+                    
+                  }
+                 }
+          });
+        });
+
+        $('#lookupType').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            if (form_data != "[]") {
+              $("#lookupValue").slideDown();
+            }
+            $('#lookupValue').html("");
+            $('#lookupValue').html("<option selected disabled hidden>Select Entry</option>");
+            for (var i = 0; i < formDataArr.length; i++) {
+              var c = formDataArr[i][valueSelected];
+              $('#lookupValue')
+                .append($("<option></option>")
+                .attr("value", i)
+                .text(c.value));
+            }
+        });
+
+        $('#lookupValue').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+
+            window.valueno = valueSelected;
+
+            $("#newFormCode").slideDown();
+            $("#myForm1").slideDown();
+            $("#myForm [data-type='component-form']").remove();
+            var contentToTransfer = $("#myForm [data-type='container-content']").html();
+            $("#combine_form [data-type='container-content'] form").append(contentToTransfer);
+            populateForm("#myForm1", formDataArr[valueSelected]);
+
+        });
+
+        $('#newFormCode').on('change', function (e) {
+          var valueSelected = this.value;
+          $('#newFormContent').html("");
+          embedForm(valueSelected, '#newFormContent', true);
+          $(".new_form").slideDown();
+
+        });
+
+        embedForm =function(shortCode, id, combine=false){
+
+          $.ajax({
+                 type: "POST",
+                 url: "php/get_form_data.php",
+                 data: {'id': shortCode},
+                 success: function(data)
+                 {
+                  var formContainer = $(id);
+                  var x = "";
+                  if (combine) {
+                    x = formContainer.html();
+                  }
+                  formContainer.html(data+x); // show response from the php script.
+                  formContainer.find("[id]").removeAttr('id');
+
+                  // Combine form
+                  formContainer = $("#combine_form");
+                  formContainer.html();
+                  x = $("#myForm1").html();
+                  if (!combine) {
+                    x = "";
+                  }
+                  formContainer.html(x + data); // show response from the php script.
+                  formContainer.find("[id]").removeAttr('id');
+
+                 }
+          });
+        }
+
+        
+        $("#myForm").submit(function(e) {
+              populateForm("#combine_form", formDataArr[valueno]);
+
+              e.preventDefault();
+
+              var form = $(this);
+              var urlData = form.attr('action');
+
+              var previousValues = $("#myForm").serializeArray();
+              populateForm("#combine_form", previousValues);
+              
+
+              // Combine Form
+              $("#show_code").val($('#combine_form').html());
+              var form = $("#sendForm");
+              var url = form.attr('action');
+              $.ajax({
+                 type: "POST",
+                 url: url,
+                 data: form.serialize(), // serializes the form's elements.
+                 success: function(data)
+                 {
+                    
+                    var newId = data;
+
+                    var formData = new FormData();
+                    formData.append('form_id', newId);
+                    formData.append('select_catalog', $('#select_catalog').val());
+                    formData.append('form_values', JSON.stringify($("#combine_form form").serializeArray()));
+                    $.ajax({
+                       type: "POST",
+                       url: urlData,
+                       data: formData,
+                        processData:false,
+                        contentType: false,
+                       success: function(data)
+                       {
+                           alert("Form data added in form id "+ newId + data);
+                       }
+                     });
+                 }
+               });
+          });
+          
+
+      });
+    </script>
+    
+  </body>
+</html>
