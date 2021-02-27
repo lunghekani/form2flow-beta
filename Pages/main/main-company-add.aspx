@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="login-brand">
-                                    Company Registration
+                                    Company Registrations
                                 </div>
                                 <%-- MULTIVIEW LINK BUTTONS --%>
                                 <div class="row nav nav-pills" align="center" id="dvNavPills" runat="server">
